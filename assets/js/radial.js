@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  var track = document.getElementById('radialTrack');
+  var track = document.getElementById('journey');
   var stage = document.getElementById('radialStage');
   if (!track || !stage) return;
 
@@ -25,13 +25,13 @@
   var N = eras.length;
   var STEP = 30;            // degrees between eras on the ring
   var geom = {};
-  var ticks = [], spokes = [];
+  var ticks = [];
   var active = -1;
   var isMobile = false;
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-  /* Build orbiting nodes (number + title) from the era panels */
+  /* Build orbiting numbered nodes from the era panels */
   eras.forEach(function (era, i) {
     var t = document.createElement('div');
     t.className = 'tick';
@@ -39,13 +39,6 @@
     t.addEventListener('click', function () { jumpTo(i); });
     wheel.appendChild(t);
     ticks.push(t);
-
-    var s = document.createElement('div');
-    s.className = 'spoke';
-    s.innerHTML = '<div class="s-title">' + (era.getAttribute('data-title') || '') + '</div>';
-    s.addEventListener('click', function () { jumpTo(i); });
-    wheel.appendChild(s);
-    spokes.push(s);
   });
 
   function measure() {
@@ -74,7 +67,6 @@
     for (var i = 0; i < N; i++) {
       var a = i * STEP;
       ticks[i].style.transform = 'rotate(' + a + 'deg) translateX(' + R + 'px) translate(-50%,-50%)';
-      spokes[i].style.transform = 'rotate(' + a + 'deg) translateX(' + R + 'px) translate(26px,-50%)';
     }
   }
 
@@ -85,7 +77,6 @@
       var a = Math.abs((i - p) * STEP);                          // angular distance from 3 o'clock
       // nodes: fade out exactly at active (the fixed token represents it), visible while orbiting
       ticks[i].style.opacity = a < 7 ? 0 : Math.max(0.16, 0.95 * (1 - (a - 7) / 90));
-      spokes[i].style.opacity = a < 8 ? 0 : Math.max(0, 0.62 * (1 - (a - 8) / 74));
     }
     var idx = Math.max(0, Math.min(N - 1, Math.round(p)));
     if (idx !== active) setActive(idx);

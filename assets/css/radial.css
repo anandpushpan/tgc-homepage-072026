@@ -56,12 +56,6 @@
   border-color:var(--orange);color:var(--orange-bright);background:rgba(255,107,44,.14);
   box-shadow:0 0 0 6px rgba(255,107,44,.08),0 0 30px rgba(255,107,44,.35);
 }
-/* orbiting era titles */
-.spoke{
-  position:absolute;top:50%;left:50%;transform-origin:0 0;
-  width:300px;white-space:nowrap;will-change:opacity;
-}
-.spoke .s-title{font-family:"Fraunces",Georgia,serif;font-weight:400;font-size:1.5rem;color:rgba(255,255,255,.62);letter-spacing:-.01em;line-height:1}
 
 /* active connector (fixed at 3 o'clock) */
 .active-connector{position:absolute;z-index:5;display:flex;align-items:center;transform:translate(-50%,-50%)}
